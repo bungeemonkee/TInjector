@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TInjector_Build_Builder_NoValidConstructor" xml:space="preserve">
-    <value>Unable to create builder for {0} as it has no public constructor where all parameters can also be resolved.</value>
-  </data>
   <data name="TInjector_Initialization_UnlockedRegistration_ServiceCast" xml:space="preserve">
     <value>Unable to register {0} as {1} because {0} can not be cast to {1}.</value>
   </data>
@@ -138,6 +135,10 @@
     <value>Types are registered more than once.
 {0}
 </value>
+  </data>
+  <data name="TInjector_RootFactory_NoValidConstructor" xml:space="preserve">
+    <value>Unable to create builders for the following types as they have no public constructor where all parameters can also be resolved:
+ * {0}</value>
   </data>
   <data name="TInjector_Root_UnregisteredService" xml:space="preserve">
     <value>Unable to resolve request for service {0} as no such service is registered.</value>

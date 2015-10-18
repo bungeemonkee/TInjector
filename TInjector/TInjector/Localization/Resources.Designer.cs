@@ -61,15 +61,6 @@ namespace TInjector.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to create builder for {0} as it has no public constructor where all parameters can also be resolved..
-        /// </summary>
-        internal static string TInjector_Build_Builder_NoValidConstructor {
-            get {
-                return ResourceManager.GetString("TInjector_Build_Builder_NoValidConstructor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Unable to register {0} as {1} because {0} can not be cast to {1}..
         /// </summary>
         internal static string TInjector_Initialization_UnlockedRegistration_ServiceCast {
@@ -124,6 +115,16 @@ namespace TInjector.Localization {
         internal static string TInjector_RootFactory_DuplicateImplementerRegistrationsOuter {
             get {
                 return ResourceManager.GetString("TInjector_RootFactory_DuplicateImplementerRegistrationsOuter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to create builders for the following types as they have no public constructor where all parameters can also be resolved:
+        /// * {0}.
+        /// </summary>
+        internal static string TInjector_RootFactory_NoValidConstructor {
+            get {
+                return ResourceManager.GetString("TInjector_RootFactory_NoValidConstructor", resourceCulture);
             }
         }
     }
