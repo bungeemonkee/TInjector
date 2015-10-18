@@ -1,7 +1,7 @@
 ﻿// TInjector: TInjector
 // ScopeType.cs
 // Created: 2015-10-17 5:54 PM
-// Modified: 2015-10-17 8:28 PM
+// Modified: 2015-10-18 11:32 AM
 
 namespace TInjector.Scope
 {
@@ -16,7 +16,7 @@ namespace TInjector.Scope
         Transient = 0,
 
         /// <summary>
-        ///     A new instance is created once, after that no new instances are ever created.
+        ///     A new instance is created once per root, after that no new instances are ever created by that root.
         /// </summary>
         Singleton = 1,
 

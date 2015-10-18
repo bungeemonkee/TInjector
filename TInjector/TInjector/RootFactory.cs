@@ -1,13 +1,12 @@
 ﻿// TInjector: TInjector
 // RootFactory.cs
 // Created: 2015-10-17 10:23 AM
-// Modified: 2015-10-17 8:28 PM
+// Modified: 2015-10-18 11:32 AM
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using TInjector.Build;
 using TInjector.Localization;
 using TInjector.Registration;
 
@@ -15,10 +14,20 @@ namespace TInjector
 {
     public class RootFactory : List<IRegistrationModule>, IRootFactory
     {
+        // the collection types we can safely map to our array builders
+        private static readonly Type[] EnumerableTypes =
+        {
+            typeof (IEnumerable<>),
+            typeof (ICollection<>),
+            typeof (IList<>)
+        };
+
         public IRoot GetRoot()
         {
             // get all the registrations and lock them
-            var lockedRegistrations = this.SelectMany(m => m.GenerateRegistrations())
+            // TODO: We may be able to save time for large collections of modules if we run GenerateRegistrations in multiple threads at once
+            var lockedRegistrations = this
+                .SelectMany(m => m.GenerateRegistrations())
                 .Select(r => new LockedRegistration(r))
                 .ToArray();
 
@@ -26,30 +35,32 @@ namespace TInjector
             ValidateDuplicateImplementerRegistrations(lockedRegistrations);
 
             // TODO: Check for duplicated service registrations where there is no default selected
-            // TODO: Should this even be an error? Or do we just pick the first one?
-            // TODO: Should we allow default services for list of services? Should requesting a single instance of a duplicated service be an error?
+            // TODO: Should this even be an error?
+            // TODO: Or do we only support is at a list?
+            // TODO: Should we allow default services for list of services?
+            // TODO: Should requesting a single instance of a duplicated service be an error?
 
-            // wrap the registrations in a BlockingCollection so we can do the cpu-intensive constructor selection in multiple threads
-            // TODO: We may be able to implement an IProducerConsumerCollection that just wraps an enumerable and avoid having to use a provider thread
-            var queue = new BlockingCollection<IRegistration>();
+            // convert the registrations to a lookup by service type
+            var registrationsByService = lockedRegistrations
+                .SelectMany(r => r.Services, (r, s) => new {Service = s, Registration = r})
+                .ToLookup(r => r.Service, r => (IRegistration) r.Registration);
 
-            // create twice as many tasks as logical process to make sure we keep them all busy
-            // one task will populate the blocking collection
-            // the others will read from it and figure out which constructor to use
-            var tasks = Enumerable.Range(0, Environment.ProcessorCount*2)
-                .Select(i => i == 0
-                    ? Task.Run(() => ProvideRegistrations(queue, lockedRegistrations))
-                    : Task.Run(() => SelectConstructors(queue)))
-                .ToArray();
+            // create a builder for each service
+            // TODO: We may be able to save time for large collections of registrations if we create the builders in multiple threads at once
+            var buildersByService = registrationsByService
+                // create a builder for this service
+                .Select(l => new Builder(l.Key, registrationsByService))
+                // for services that are arrays also support several collections
+                .SelectMany(b => b.ServiceType.IsArray
+                    // add the mappings for the collection types, and keep the mapping for the original array
+                    ? EnumerableTypes.Select(t => new KeyValuePair<Type, IBuilder>(t.MakeGenericType(b.ServiceType.GetElementType()), b))
+                        .Union(new[] {new KeyValuePair<Type, IBuilder>(b.ServiceType, b)})
+                    // keep the mapping for the original service type
+                    : new[] {new KeyValuePair<Type, IBuilder>(b.ServiceType, b)})
+                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
-            // wait for all the registration constructor selection to finish
-            Task.WaitAll(tasks);
-
-            // TODO: Give the registrations to the new root object
-
-            // TODO: Return the new root object
-
-            throw new NotImplementedException();
+            // create and return the new root
+            return new Root(buildersByService);
         }
 
         public void Register(params IRegistrationModule[] modules)
@@ -59,38 +70,6 @@ namespace TInjector
             {
                 Add(module);
             }
-        }
-
-        private void ProvideRegistrations(BlockingCollection<IRegistration> queue, IEnumerable<IRegistration> registrations)
-        {
-            // for each registration...
-            foreach (var registration in registrations)
-            {
-                // add the registration to the queue
-                queue.Add(registration);
-            }
-
-            // mark the queue as complete
-            queue.CompleteAdding();
-        }
-
-        private void SelectConstructors(BlockingCollection<IRegistration> queue)
-        {
-            IRegistration registration;
-
-            // while there is anything left in the queue...
-            while (!queue.IsCompleted && queue.TryTake(out registration))
-            {
-                // select the constructor to use for the registration
-                ConstructorSelector(registration);
-            }
-        }
-
-        private void ConstructorSelector(IRegistration registration)
-        {
-            // TODO: Constructor selection algorithm?
-
-            throw new NotImplementedException();
         }
 
         private static void ValidateDuplicateImplementerRegistrations(IEnumerable<IRegistration> registrations)

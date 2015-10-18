@@ -1,7 +1,7 @@
 ﻿// TInjector: TInjector
 // RegistrationModule.cs
 // Created: 2015-10-17 10:23 AM
-// Modified: 2015-10-17 8:28 PM
+// Modified: 2015-10-18 11:32 AM
 
 using System.Collections.Generic;
 using System.Linq;
@@ -58,9 +58,11 @@ namespace TInjector.Registration
 
         /// <summary>
         ///     Registers every public class from the assembly for the given type to (almost) every interface it implements.
-        ///     Note: Some system interfaces are excluded from registration. See the documentation for
-        ///     TInjector.Initialization.UnlockedRegistration.AsAllServices.
         /// </summary>
+        /// <remarks>
+        ///     Note: Some system interfaces are excluded from registration. See the documentation for
+        ///     TInjector.Initialization.UnlockedRegistration.AddAllServices.
+        /// </remarks>
         /// <typeparam name="T">A type in the assembly containing all the types to register.</typeparam>
         protected void RegisterAll<T>()
         {
@@ -69,9 +71,11 @@ namespace TInjector.Registration
 
         /// <summary>
         ///     Registers every public class from the assembly for the given type to (almost) every interface it implements.
-        ///     Note: Some system interfaces are excluded from registration. See the documentation for
-        ///     TInjector.Initialization.UnlockedRegistration.AsAllServices.
         /// </summary>
+        /// <remarks>
+        ///     Note: Some system interfaces are excluded from registration. See the documentation for
+        ///     TInjector.Initialization.UnlockedRegistration.AddAllServices.
+        /// </remarks>
         /// <typeparam name="T">A type in the assembly containing all the types to register.</typeparam>
         /// <param name="inNamespace">
         ///     The namespace in which types will be registered. All types under this namespaces (and nested

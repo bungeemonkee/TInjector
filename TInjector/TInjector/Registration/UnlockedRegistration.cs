@@ -1,7 +1,7 @@
 ﻿// TInjector: TInjector
 // UnlockedRegistration.cs
 // Created: 2015-10-17 7:37 PM
-// Modified: 2015-10-17 8:28 PM
+// Modified: 2015-10-18 11:32 AM
 
 using System;
 using System.Collections.Generic;
@@ -55,12 +55,14 @@ namespace TInjector.Registration
         }
 
         /// <summary>
-        ///     Registers an implementation type against all interfaces it implements.
+        ///     Registers an implementation type against (almost) all interfaces it implements.
+        /// </summary>
+        /// <remarks>
         ///     The following interfaces are ignored if they are implemented:
         ///     * System.IDisposable
         ///     * System.ComponentModel.IComponent
         ///     * System.ComponentModel.IContainer
-        /// </summary>
+        /// </remarks>
         public void AddAllServices()
         {
             // the interface types to ignore

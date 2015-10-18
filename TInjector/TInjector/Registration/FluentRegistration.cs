@@ -1,7 +1,7 @@
 ﻿// TInjector: TInjector
 // FluentRegistration.cs
 // Created: 2015-10-17 5:54 PM
-// Modified: 2015-10-17 8:28 PM
+// Modified: 2015-10-18 11:32 AM
 
 using TInjector.Scope;
 
@@ -28,10 +28,12 @@ namespace TInjector.Registration
         }
 
         /// <summary>
-        ///     Registers an implementation type against all interfaces it implements.
+        ///     Registers an implementation type against (almost) all interfaces it implements.
+        /// </summary>
+        /// <remarks>
         ///     Note: Some system interfaces are excluded from registration. See the documentation for
         ///     TInjector.Initialization.UnlockedRegistration.AddAllServices.
-        /// </summary>
+        /// </remarks>
         /// <returns>This registration object.</returns>
         public FluentRegistration<TImplementer> AsAllServices()
         {
