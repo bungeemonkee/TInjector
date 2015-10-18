@@ -39,16 +39,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Initialization\IRegistration.cs" />
-    <Compile Include="Initialization\Registration.cs" />
-    <Compile Include="Initialization\RegistrationUtility.cs" />
+    <Compile Include="Registration\AutomaticRegistrationModule.cs" />
+    <Compile Include="Registration\FluentRegistration.cs" />
+    <Compile Include="Registration\IRegistration.cs" />
+    <Compile Include="Registration\LockedRegistration.cs" />
     <Compile Include="IRoot.cs" />
     <Compile Include="IRootFactory.cs" />
+    <Compile Include="Localization\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Initialization\IRegistrationModule.cs" />
-    <Compile Include="Initialization\RegistrationModule.cs" />
+    <Compile Include="Registration\IRegistrationModule.cs" />
+    <Compile Include="Registration\RegistrationModule.cs" />
+    <Compile Include="Registration\UnlockedRegistration.cs" />
     <Compile Include="Root.cs" />
     <Compile Include="RootFactory.cs" />
+    <Compile Include="Scope\ScopeType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
