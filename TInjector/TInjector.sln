@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{87
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TInjector.Examples", "TInjector.Examples\TInjector.Examples.csproj", "{EC0A1FC9-6194-4CFF-9DF5-8513EB559BCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TInjector.Web.Mvc", "TInjector.Web.Mvc\TInjector.Web.Mvc.csproj", "{EDC84A5C-8F69-4486-BB34-044A3A361800}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{EC0A1FC9-6194-4CFF-9DF5-8513EB559BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC0A1FC9-6194-4CFF-9DF5-8513EB559BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC0A1FC9-6194-4CFF-9DF5-8513EB559BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDC84A5C-8F69-4486-BB34-044A3A361800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDC84A5C-8F69-4486-BB34-044A3A361800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDC84A5C-8F69-4486-BB34-044A3A361800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDC84A5C-8F69-4486-BB34-044A3A361800}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
