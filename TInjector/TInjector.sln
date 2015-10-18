@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{81E530E0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{87D25207-FF5B-4FEF-A0EA-42BE9FCAD80C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TInjector.Examples", "TInjector.Examples\TInjector.Examples.csproj", "{EC0A1FC9-6194-4CFF-9DF5-8513EB559BCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,11 +27,16 @@ Global
 		{9B0E1395-0F74-40AE-8536-CECC2766B222}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B0E1395-0F74-40AE-8536-CECC2766B222}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B0E1395-0F74-40AE-8536-CECC2766B222}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC0A1FC9-6194-4CFF-9DF5-8513EB559BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC0A1FC9-6194-4CFF-9DF5-8513EB559BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC0A1FC9-6194-4CFF-9DF5-8513EB559BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC0A1FC9-6194-4CFF-9DF5-8513EB559BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9B0E1395-0F74-40AE-8536-CECC2766B222} = {81E530E0-4096-472C-A4CE-7EE8F3A28BAE}
+		{EC0A1FC9-6194-4CFF-9DF5-8513EB559BCF} = {87D25207-FF5B-4FEF-A0EA-42BE9FCAD80C}
 	EndGlobalSection
 EndGlobal
