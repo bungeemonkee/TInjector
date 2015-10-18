@@ -12,3 +12,10 @@ A simple .NET IoC container with only the features needed for correctly-designed
 * Simplicity (of the code, of the api, of the documentation, everywhere)
 * Documented code (XML docs on all protected or public code, notes inside code on pretty much every line)
 * Localizable code (no embedded strings!)
+
+## TODO:
+* Support constants
+* Support value types
+* Support getting lists of implementations
+* Support activation callbacks
+* Support decorators (implements the same interface and takes the base implementation as a constructor param)
