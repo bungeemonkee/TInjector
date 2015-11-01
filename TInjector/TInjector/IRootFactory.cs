@@ -1,9 +1,9 @@
 ﻿// TInjector: TInjector
 // IRootFactory.cs
 // Created: 2015-10-17 10:23 AM
-// Modified: 2015-10-18 11:32 AM
+// Modified: 2015-11-01 6:31 PM
 
-using TInjector.Registration;
+using TInjector.Pipeline;
 
 namespace TInjector
 {
@@ -17,7 +17,7 @@ namespace TInjector
         ///     Save modules to generate registrations when the factory generates a root.
         /// </summary>
         /// <param name="modules"></param>
-        void Register(params IRegistrationModule[] modules);
+        void Register(params IRegistrationGenerator[] modules);
 
         /// <summary>
         ///     Get a root from this factory.

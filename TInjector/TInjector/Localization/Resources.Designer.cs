@@ -88,22 +88,13 @@ namespace TInjector.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to resolve request for service {0} as no such service is registered..
-        /// </summary>
-        internal static string TInjector_Root_UnregisteredService {
-            get {
-                return ResourceManager.GetString("TInjector_Root_UnregisteredService", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} was registered from these locations:
         ///{1}
         ///.
         /// </summary>
-        internal static string TInjector_RootFactory_DuplicateImplementerRegistrationsInner {
+        internal static string TInjector_Pipeline_Validator_DuplicateImplementerRegistrationsInner {
             get {
-                return ResourceManager.GetString("TInjector_RootFactory_DuplicateImplementerRegistrationsInner", resourceCulture);
+                return ResourceManager.GetString("TInjector_Pipeline_Validator_DuplicateImplementerRegistrationsInner", resourceCulture);
             }
         }
         
@@ -112,9 +103,9 @@ namespace TInjector.Localization {
         ///{0}
         ///.
         /// </summary>
-        internal static string TInjector_RootFactory_DuplicateImplementerRegistrationsOuter {
+        internal static string TInjector_Pipeline_Validator_DuplicateImplementerRegistrationsOuter {
             get {
-                return ResourceManager.GetString("TInjector_RootFactory_DuplicateImplementerRegistrationsOuter", resourceCulture);
+                return ResourceManager.GetString("TInjector_Pipeline_Validator_DuplicateImplementerRegistrationsOuter", resourceCulture);
             }
         }
         
@@ -122,9 +113,18 @@ namespace TInjector.Localization {
         ///   Looks up a localized string similar to Unable to create builders for the following types as they have no public constructor where all parameters can also be resolved:
         /// * {0}.
         /// </summary>
-        internal static string TInjector_RootFactory_NoValidConstructor {
+        internal static string TInjector_Pipeline_Validator_NoValidConstructor {
             get {
-                return ResourceManager.GetString("TInjector_RootFactory_NoValidConstructor", resourceCulture);
+                return ResourceManager.GetString("TInjector_Pipeline_Validator_NoValidConstructor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to resolve request for service {0} as no such service is registered..
+        /// </summary>
+        internal static string TInjector_Root_UnregisteredService {
+            get {
+                return ResourceManager.GetString("TInjector_Root_UnregisteredService", resourceCulture);
             }
         }
     }

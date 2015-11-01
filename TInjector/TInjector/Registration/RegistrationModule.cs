@@ -1,18 +1,19 @@
 ﻿// TInjector: TInjector
 // RegistrationModule.cs
 // Created: 2015-10-17 10:23 AM
-// Modified: 2015-10-18 11:32 AM
+// Modified: 2015-11-01 6:31 PM
 
 using System.Collections.Generic;
 using System.Linq;
+using TInjector.Pipeline;
 
 namespace TInjector.Registration
 {
-    public abstract class RegistrationModule : IRegistrationModule
+    public abstract class RegistrationModule : IRegistrationGenerator
     {
         private IList<IRegistration> _registrations;
 
-        public IEnumerable<IRegistration> GenerateRegistrations()
+        public IEnumerable<IRegistration> Execute()
         {
             // since we're using this to maintain state we can only generate one set of registrations at once
             lock (this)

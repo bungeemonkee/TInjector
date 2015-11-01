@@ -41,6 +41,17 @@
   <ItemGroup>
     <Compile Include="Build\Builder.cs" />
     <Compile Include="Build\IBuilder.cs" />
+    <Compile Include="Pipeline\ConstructorSelector.cs" />
+    <Compile Include="Pipeline\DependencyCollector.cs" />
+    <Compile Include="Pipeline\IConstructorSelector.cs" />
+    <Compile Include="Pipeline\IDependencyCollector.cs" />
+    <Compile Include="Pipeline\IRegistrationGenerator.cs" />
+    <Compile Include="Pipeline\IValidator.cs" />
+    <Compile Include="Pipeline\PipelineExecuter.cs" />
+    <Compile Include="Pipeline\ServiceRegistrationConstructorDependencies.cs" />
+    <Compile Include="Pipeline\Validator.cs" />
+    <Compile Include="Pipeline\ServiceRegistrationConstructor.cs" />
+    <Compile Include="Pipeline\ServiceRegistration.cs" />
     <Compile Include="Registration\AutomaticRegistrationModule.cs" />
     <Compile Include="Registration\FluentRegistration.cs" />
     <Compile Include="Registration\IRegistration.cs" />
@@ -53,7 +64,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registration\IRegistrationModule.cs" />
     <Compile Include="Registration\RegistrationModule.cs" />
     <Compile Include="Registration\UnlockedRegistration.cs" />
     <Compile Include="Root.cs" />

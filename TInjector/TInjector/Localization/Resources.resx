@@ -126,17 +126,17 @@
   <data name="TInjector_Initialization_UnlockedRegistration_ServiceIsInterface" xml:space="preserve">
     <value>Unable to register {0} because it is an interface.</value>
   </data>
-  <data name="TInjector_RootFactory_DuplicateImplementerRegistrationsInner" xml:space="preserve">
+  <data name="TInjector_Pipeline_Validator_DuplicateImplementerRegistrationsInner" xml:space="preserve">
     <value>{0} was registered from these locations:
 {1}
 </value>
   </data>
-  <data name="TInjector_RootFactory_DuplicateImplementerRegistrationsOuter" xml:space="preserve">
+  <data name="TInjector_Pipeline_Validator_DuplicateImplementerRegistrationsOuter" xml:space="preserve">
     <value>Types are registered more than once.
 {0}
 </value>
   </data>
-  <data name="TInjector_RootFactory_NoValidConstructor" xml:space="preserve">
+  <data name="TInjector_Pipeline_Validator_NoValidConstructor" xml:space="preserve">
     <value>Unable to create builders for the following types as they have no public constructor where all parameters can also be resolved:
  * {0}</value>
   </data>
