@@ -1,7 +1,6 @@
 ﻿// TInjector: TInjector
 // ServiceRegistrationConstructorDependencies.cs
 // Created: 2015-11-01 6:09 PM
-// Modified: 2015-11-01 6:31 PM
 
 namespace TInjector.Pipeline
 {

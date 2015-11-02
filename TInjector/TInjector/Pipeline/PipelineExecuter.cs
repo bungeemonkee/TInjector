@@ -1,7 +1,6 @@
 ﻿// TInjector: TInjector
 // PipelineExecuter.cs
 // Created: 2015-11-01 4:55 PM
-// Modified: 2015-11-01 6:31 PM
 
 using System;
 using System.Collections.Generic;
@@ -11,9 +10,9 @@ namespace TInjector.Pipeline
 {
     public class PipelineExecuter
     {
+        public readonly IBuilderGenerator BuilderGenerator;
         public readonly IConstructorSelector ConstructorSelector;
         public readonly IDependencyCollector DependencyCollector;
-        public readonly IBuilderGenerator BuilderGenerator;
         public readonly IValidator Validator;
 
         public PipelineExecuter()

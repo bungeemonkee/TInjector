@@ -1,7 +1,6 @@
 ﻿// TInjector: TInjector
 // DependencyCollector.cs
 // Created: 2015-11-01 6:13 PM
-// Modified: 2015-11-01 6:31 PM
 
 using System;
 using System.Linq;

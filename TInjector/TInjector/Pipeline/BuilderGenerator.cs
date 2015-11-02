@@ -1,7 +1,6 @@
 ﻿// TInjector: TInjector
 // BuilderGenerator.cs
 // Created: 2015-11-01 9:23 PM
-// Modified: 2015-11-01 10:16 PM
 
 using System;
 using System.Collections.Generic;

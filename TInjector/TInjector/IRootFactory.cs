@@ -1,7 +1,6 @@
 ﻿// TInjector: TInjector
 // IRootFactory.cs
 // Created: 2015-10-17 10:23 AM
-// Modified: 2015-11-01 6:31 PM
 
 using TInjector.Pipeline;
 

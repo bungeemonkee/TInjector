@@ -1,7 +1,6 @@
 ﻿// TInjector: TInjector
 // Validator.cs
 // Created: 2015-11-01 5:02 PM
-// Modified: 2015-11-01 6:31 PM
 
 using System;
 using System.Collections.Generic;

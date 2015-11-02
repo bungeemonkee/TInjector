@@ -1,7 +1,6 @@
 ﻿// TInjector: TInjector
 // ServiceRegistrationConstructor.cs
 // Created: 2015-11-01 5:35 PM
-// Modified: 2015-11-01 6:31 PM
 
 using System;
 using System.Reflection;

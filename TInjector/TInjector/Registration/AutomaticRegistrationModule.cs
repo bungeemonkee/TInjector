@@ -1,7 +1,6 @@
 ﻿// TInjector: TInjector
 // AutomaticRegistrationModule.cs
 // Created: 2015-10-17 7:02 PM
-// Modified: 2015-10-18 11:32 AM
 
 namespace TInjector.Registration
 {

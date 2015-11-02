@@ -1,7 +1,6 @@
 ﻿// TInjector: TInjector
 // LockedRegistration.cs
 // Created: 2015-10-17 7:26 PM
-// Modified: 2015-10-18 11:32 AM
 
 using System;
 using System.Collections.Generic;
