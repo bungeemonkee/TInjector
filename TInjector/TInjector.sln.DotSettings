@@ -4,8 +4,7 @@
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/WRAP_LINES/@EntryValue">False</s:Boolean>
 	<s:String x:Key="/Default/CodeStyle/FileHeader/FileHeaderText/@EntryValue">$SOLUTION$: $PROJECT$&#xD;
 $FILENAME$&#xD;
-Created: $CREATED_YEAR$-$CREATED_MONTH$-$CREATED_DAY$ $CREATED_TIME$&#xD;
-Modified: $CURRENT_YEAR$-$CURRENT_MONTH$-$CURRENT_DAY$ $CURRENT_TIME$</s:String>
+Created: $CREATED_YEAR$-$CREATED_MONTH$-$CREATED_DAY$ $CREATED_TIME$</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=TypesAndNamespaces/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb"&gt;&lt;ExtraRule Prefix="TInjector" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EMigrateBlankLinesAroundFieldToBlankLinesAroundProperty/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=2B153B3C2CAA2546BD6E27547EFF04C4/@KeyIndexDefined">True</s:Boolean>
