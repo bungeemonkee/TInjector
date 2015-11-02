@@ -1,7 +1,7 @@
 ﻿// TInjector: TInjector
 // IRegistration.cs
-// Created: 2015-10-17 10:23 AM
-// Modified: 2015-10-18 11:32 AM
+// Created: 2015-11-01 5:22 PM
+// Modified: 2015-11-01 10:16 PM
 
 using System;
 using System.Collections.Generic;

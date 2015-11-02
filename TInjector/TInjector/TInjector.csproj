@@ -39,10 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Build\Builder.cs" />
-    <Compile Include="Build\IBuilder.cs" />
+    <Compile Include="Pipeline\Builder.cs" />
+    <Compile Include="Pipeline\IBuilder.cs" />
+    <Compile Include="Pipeline\BuilderGenerator.cs" />
     <Compile Include="Pipeline\ConstructorSelector.cs" />
     <Compile Include="Pipeline\DependencyCollector.cs" />
+    <Compile Include="Pipeline\IBuilderGenerator.cs" />
     <Compile Include="Pipeline\IConstructorSelector.cs" />
     <Compile Include="Pipeline\IDependencyCollector.cs" />
     <Compile Include="Pipeline\IRegistrationGenerator.cs" />
