@@ -11,7 +11,6 @@ A simple .NET IoC container with only the features needed for correctly-designed
 * Testability (unit test all the code, create an api that allows extensive unit testing of anything using it)
 * Simplicity (of the code, of the api, of the documentation, everywhere)
 * Documented code (XML docs on all protected or public code, notes inside code on pretty much every line)
-* Localizable code (no embedded strings!)
 
 ## TODO:
 * Support constants

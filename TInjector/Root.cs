@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using TInjector.Localization;
 using TInjector.Pipeline;
 
 namespace TInjector
@@ -27,10 +26,12 @@ namespace TInjector
 
         public object Get(Type service)
         {
+            const string format = @"Unable to resolve request for service { 0} as no such service is registered.";
+
             // make sure we can resolve the request
             if (!_buildersByService.ContainsKey(service))
             {
-                throw new InvalidOperationException(string.Format(Resources.TInjector_Root_UnregisteredService, service.FullName));
+                throw new InvalidOperationException(string.Format(format, service.FullName));
             }
 
             // create the scope cache for this object graph

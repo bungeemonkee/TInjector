@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TInjector.Localization;
 
 namespace TInjector.Pipeline
 {
@@ -40,12 +39,20 @@ namespace TInjector.Pipeline
             // if there are no duplicate registrations then return
             if (!duplicatedImplementationRegistrations.Any()) return;
 
+            const string format = @"{0} was registered from these locations:
+{1}
+";
             const string seperator = @"
 
 ";
+
+            const string outer = @"Types are registered more than once.
+{0}
+";
+
             // throw the error message about the duplicate registrations
-            var inner = string.Join(String.Empty, duplicatedImplementationRegistrations.Select(g => string.Format(Resources.TInjector_Pipeline_Validator_DuplicateImplementerRegistrationsInner, g.Key.FullName, string.Join(seperator, g.Select(r => r.Registration.CreationStackTrace)))));
-            throw new InvalidOperationException(string.Format(Resources.TInjector_Pipeline_Validator_DuplicateImplementerRegistrationsOuter, inner));
+            var inner = string.Join(string.Empty, duplicatedImplementationRegistrations.Select(g => string.Format(format, g.Key.FullName, string.Join(seperator, g.Select(r => r.Registration.CreationStackTrace)))));
+            throw new InvalidOperationException(string.Format(outer, inner));
         }
 
         private static void ValidateImplementorsWithNoConstructor(IEnumerable<IGrouping<Type, ServiceRegistrationConstructorDependencies>> services)
@@ -64,9 +71,11 @@ namespace TInjector.Pipeline
             // if there are no registrations with no valid constructor return
             if (implementersWithNoConstructor.Length <= 0) return;
 
+            const string format = @"Unable to create builders for the following types as they have no public constructor where all parameters can also be resolved:
+ * {0}";
             const string separator = @"
  * ";
-            throw new InvalidOperationException(string.Format(Resources.TInjector_Pipeline_Validator_NoValidConstructor, string.Join(separator, implementersWithNoConstructor)));
+            throw new InvalidOperationException(string.Format(format, string.Join(separator, implementersWithNoConstructor)));
         }
     }
 }

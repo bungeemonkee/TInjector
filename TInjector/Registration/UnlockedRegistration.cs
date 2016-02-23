@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using TInjector.Localization;
 using TInjector.Scope;
 
 namespace TInjector.Registration
@@ -94,12 +93,12 @@ namespace TInjector.Registration
         {
             if (implementer.IsInterface)
             {
-                throw new InvalidOperationException(string.Format(Resources.TInjector_Initialization_UnlockedRegistration_ServiceIsInterface, implementer.FullName));
+                throw new InvalidOperationException(string.Format("Unable to register {0} because it is an interface.", implementer.FullName));
             }
 
             if (implementer.IsAbstract)
             {
-                throw new InvalidOperationException(string.Format(Resources.TInjector_Initialization_UnlockedRegistration_ServiceIsAbstract, implementer.FullName));
+                throw new InvalidOperationException(string.Format("Unable to register {0} because it is abstract.", implementer.FullName));
             }
         }
 
@@ -107,7 +106,7 @@ namespace TInjector.Registration
         {
             if (!service.IsAssignableFrom(Implementer))
             {
-                throw new InvalidOperationException(string.Format(Resources.TInjector_Initialization_UnlockedRegistration_ServiceCast, Implementer.FullName, service.FullName));
+                throw new InvalidOperationException(string.Format("Unable to register {0} as {1} because {0} can not be cast to { 1}.", Implementer.FullName, service.FullName));
             }
         }
     }
