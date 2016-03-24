@@ -9,6 +9,7 @@ A simple .NET IoC container with only the features needed for correctly-designed
 * Fully strongly typed fluent configuration interface
 * No by-type bindings, bind to instances, factories, or factory functions only
 * No reflection in the core lib
+    * `typeof(T)` is allowed to get Type instances to be used as dictionary keys, but no properties or methods on Type instances may be called.
 * High concurrency (lock as little as possible)
 * Support heavy automation (automatic registration wherever reasonable)
     * In some cases this might conflict with not using reflection in the core lib.
@@ -20,6 +21,6 @@ A simple .NET IoC container with only the features needed for correctly-designed
 ## TODO:
 * Support constants
 * Support value types
-* Support getting lists of implementations
+* Support getting enumerables of implementations
 * Support activation callbacks
 * Support decorators (implements the same interface and takes the base implementation as a constructor param)

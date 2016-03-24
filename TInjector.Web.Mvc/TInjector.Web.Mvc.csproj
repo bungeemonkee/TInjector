@@ -75,13 +75,13 @@
     <Compile Include="TInjectorDependencyResolver.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TInjector\TInjector.csproj">
-      <Project>{eb2d0709-075d-4b01-bf55-c11c81440d2e}</Project>
-      <Name>TInjector</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\TInjector\TInjector.csproj">
+      <Project>{a8e6e3ac-b222-47a2-8298-93d5f48df03c}</Project>
+      <Name>TInjector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

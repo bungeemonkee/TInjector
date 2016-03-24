@@ -1,21 +1,18 @@
-﻿// TInjector: TInjector
-// IRegistration.cs
-// Created: 2015-11-01 5:22 PM
-
-using System;
-using System.Collections.Generic;
-using TInjector.Scope;
+﻿using System;
 
 namespace TInjector.Registration
 {
-    /// <summary>
-    ///     All functionality required for type registrations
-    /// </summary>
-    public interface IRegistration
+    public interface IRegistration<out T>
+        where T : class
     {
+        Scope Scope { get; }
+
         Type Implementer { get; }
+
+        IFactory<T> Factory { get; }
+
+        Type[] Services { get; }
+
         string CreationStackTrace { get; }
-        IEnumerable<Type> Services { get; }
-        ScopeType Scope { get; }
     }
 }

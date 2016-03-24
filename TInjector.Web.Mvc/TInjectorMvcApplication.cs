@@ -4,16 +4,18 @@
 // Modified: 2015-10-18 11:32 AM
 
 using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
+using TInjector.Registration;
 
 namespace TInjector.Web.Mvc
 {
     public abstract class TInjectorMvcApplication : HttpApplication
     {
-        protected static IRoot Root { get; private set; }
+        protected static ILocator Locator { get; private set; }
 
-        protected abstract IRootFactory GetRootFactory();
+        protected abstract IEnumerable<IRegistrationFactory> GetRegistrationFactories();
 
         public virtual void Application_Start(object sender, EventArgs e)
         {
@@ -21,13 +23,13 @@ namespace TInjector.Web.Mvc
             // Since we only want a single root factory (and root) we need to lock when generating the root.
 
             // if there is already a root then return, shouldn't happen but it's worth it to be sure
-            if (Root != null) return;
+            if (Locator != null) return;
 
             // construct the root singleton
-            Root = GetRootFactory().GetRoot();
+            Locator = new LocatorFactory(GetRegistrationFactories()).GetLocator();
 
             // create the new dependency resolver
-            var dependencyResolver = new TInjectorDependencyResolver(Root);
+            var dependencyResolver = new TInjectorDependencyResolver(Locator);
 
             // set the new dependency resolver
             DependencyResolver.SetResolver(dependencyResolver);

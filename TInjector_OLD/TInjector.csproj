@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EC0A1FC9-6194-4CFF-9DF5-8513EB559BCF}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{EB2D0709-075D-4B01-BF55-C11C81440D2E}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TInjector.Examples</RootNamespace>
-    <AssemblyName>TInjector.Examples</AssemblyName>
+    <RootNamespace>TInjector</RootNamespace>
+    <AssemblyName>TInjector</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,16 +22,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>TInjector.Examples.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -44,22 +39,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\IService.cs" />
-    <Compile Include="Services\Service.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Pipeline\Builder.cs" />
+    <Compile Include="Pipeline\IBuilder.cs" />
+    <Compile Include="Pipeline\BuilderGenerator.cs" />
+    <Compile Include="Pipeline\ConstructorSelector.cs" />
+    <Compile Include="Pipeline\DependencyCollector.cs" />
+    <Compile Include="Pipeline\IBuilderGenerator.cs" />
+    <Compile Include="Pipeline\IConstructorSelector.cs" />
+    <Compile Include="Pipeline\IDependencyCollector.cs" />
+    <Compile Include="Pipeline\IRegistrationGenerator.cs" />
+    <Compile Include="Pipeline\IValidator.cs" />
+    <Compile Include="Pipeline\PipelineExecuter.cs" />
+    <Compile Include="Pipeline\ServiceRegistrationConstructorDependencies.cs" />
+    <Compile Include="Pipeline\Validator.cs" />
+    <Compile Include="Pipeline\ServiceRegistrationConstructor.cs" />
+    <Compile Include="Pipeline\ServiceRegistration.cs" />
+    <Compile Include="Registration\AutomaticRegistrationModule.cs" />
+    <Compile Include="Registration\FluentRegistration.cs" />
+    <Compile Include="Registration\IRegistration.cs" />
+    <Compile Include="Registration\LockedRegistration.cs" />
+    <Compile Include="IRoot.cs" />
+    <Compile Include="IRootFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Simple\SimpleMain.cs" />
+    <Compile Include="Registration\RegistrationModule.cs" />
+    <Compile Include="Registration\UnlockedRegistration.cs" />
+    <Compile Include="Root.cs" />
+    <Compile Include="RootFactory.cs" />
+    <Compile Include="Scope\ScopeType.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TInjector\TInjector.csproj">
-      <Project>{a8e6e3ac-b222-47a2-8298-93d5f48df03c}</Project>
-      <Name>TInjector</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

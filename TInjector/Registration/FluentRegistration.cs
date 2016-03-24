@@ -1,59 +1,85 @@
-﻿// TInjector: TInjector
-// FluentRegistration.cs
-// Created: 2015-10-17 5:54 PM
-
-using TInjector.Scope;
+﻿using System;
+using System.Linq.Expressions;
 
 namespace TInjector.Registration
 {
-    public class FluentRegistration<TImplementer> : UnlockedRegistration
+    public class FluentRegistration<T> : IRegistration<T>
+        where T : class
     {
-        public FluentRegistration() : base(typeof (TImplementer))
+        private readonly FluentRegistration<T> _parent;
+        private string _creationStackTrace;
+        private IFactory<T> _factory;
+        private Type _implementer;
+        private Scope _scope;
+        private Type[] _services;
+
+        public string CreationStackTrace => _parent?.CreationStackTrace ?? _creationStackTrace;
+
+        public IFactory<T> Factory => _parent?.Factory ?? _factory;
+
+        public Type Implementer => _parent?.Implementer ?? _implementer;
+
+        public Scope Scope => _parent?.Scope ?? _scope;
+
+        public Type[] Services => _parent?.Services ?? _services;
+
+        public FluentRegistration(Expression<Func<IRequest, T>> expression)
+            : this(new ExpressionFactory<T>(expression))
+        { }
+
+        public FluentRegistration(IFactory<T> factory)
         {
+            _factory = factory;
+            _implementer = typeof(T);
+            _scope = Scope.Transient;
+            _services = new[] { _implementer };
+
+            try
+            {
+                throw new Exception();
+            }
+            catch (Exception ex)
+            {
+                // HACK: This is very non-ideal, but protable libraries don't (currently) support direct stack traces
+                _creationStackTrace = ex.StackTrace;
+            }
         }
 
-        /// <summary>
-        ///     Registers an implementer type against the given service type.
-        /// </summary>
-        /// <typeparam name="TService">The type of the service as which the implementer will be registered.</typeparam>
-        /// <returns>This registration object.</returns>
-        public FluentRegistration<TImplementer> AsService<TService>()
+        protected FluentRegistration(FluentRegistration<T> parent)
         {
-            // add the service
-            AddService(typeof (TService));
+            _parent = parent;
+        }
 
-            // return this same object
+        public FluentRegistration<T> InScope(Scope scope)
+        {
+            _scope = scope;
             return this;
         }
 
-        /// <summary>
-        ///     Registers an implementation type against (almost) all interfaces it implements.
-        /// </summary>
-        /// <remarks>
-        ///     Note: Some system interfaces are excluded from registration. See the documentation for
-        ///     TInjector.Initialization.UnlockedRegistration.AddAllServices.
-        /// </remarks>
-        /// <returns>This registration object.</returns>
-        public FluentRegistration<TImplementer> AsAllServices()
+        protected void AddServices(params Type[] services)
         {
-            // register all the services
-            AddAllServices();
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
 
-            // return this same object
-            return this;
-        }
+            if (services.Length == 0) return;
 
-        /// <summary>
-        ///     Sets the scope type for this registration.
-        /// </summary>
-        /// <returns>This registration object.</returns>
-        public FluentRegistration<TImplementer> InScope(ScopeType scope)
-        {
-            // set the scope
-            Scope = scope;
+            if (_parent != null)
+            {
+                // Add the services to the parent instead
+                _parent.AddServices(services);
+                return;
+            }
 
-            // return this same object
-            return this;
+            // Resize the new array to be able to hold both
+            Array.Resize(ref services, services.Length + _services.Length);
+
+            // Add the current array to the new array
+            Array.Copy(_services, 0, services, services.Length - _services.Length, _services.Length);
+
+            // Save the new services array
+            _services = services;
         }
     }
 }
