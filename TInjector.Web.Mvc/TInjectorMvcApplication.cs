@@ -5,8 +5,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TInjector.Locator;
 using TInjector.Registration;
 
 namespace TInjector.Web.Mvc
@@ -15,7 +17,7 @@ namespace TInjector.Web.Mvc
     {
         protected static ILocator Locator { get; private set; }
 
-        protected abstract IEnumerable<IRegistrationFactory> GetRegistrationFactories();
+        protected abstract IEnumerable<IRegistrationCollection> GetRegistrationCollections();
 
         public virtual void Application_Start(object sender, EventArgs e)
         {
@@ -26,7 +28,7 @@ namespace TInjector.Web.Mvc
             if (Locator != null) return;
 
             // construct the root singleton
-            Locator = new LocatorFactory(GetRegistrationFactories()).GetLocator();
+            Locator = new RootLocator(GetRegistrationCollections().ToArray());
 
             // create the new dependency resolver
             var dependencyResolver = new TInjectorDependencyResolver(Locator);

@@ -9,7 +9,17 @@ namespace TInjector.Reflection.Registration
     {
         private Func<IRequest, T> _constructorInvoker;
 
-        public T Make(IRequest request)
+        public object Make(IRequest request)
+        {
+            if (_constructorInvoker == null)
+            {
+                _constructorInvoker = GetConstructorInvoker(request);
+            }
+
+            return _constructorInvoker(request);
+        }
+
+        public T Make(IRequest<T> request)
         {
             if (_constructorInvoker == null)
             {
@@ -45,12 +55,12 @@ namespace TInjector.Reflection.Registration
         {
             if (_constructorInvoker != null) return _constructorInvoker;
 
-            var constructor = SelectConstructor(x => request.GetRegistration(x) != null);
+            var constructor = SelectConstructor(x => request.Registrations.GetRegistration(x) != null);
             var parameters = constructor.GetParameters().Select(x => x.ParameterType).ToArray();
 
             return (IRequest r) =>
             {
-                var arguments = parameters.Select(x => r.Get(x)).ToArray();
+                var arguments = parameters.Select(x => r.Locator.Get(x)).ToArray();
                 return (T)constructor.Invoke(arguments);
             };
         }

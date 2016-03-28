@@ -22,5 +22,4 @@ A simple .NET IoC container with only the features needed for correctly-designed
 * Support constants
 * Support value types
 * Support getting enumerables of implementations
-* Support activation callbacks
 * Support decorators (implements the same interface and takes the base implementation as a constructor param)

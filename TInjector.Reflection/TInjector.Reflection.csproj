@@ -43,7 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration\ReflectedFactory.cs" />
     <Compile Include="Registration\ReflectedRegistration.cs" />
-    <Compile Include="Registration\ReflectedRegistrationFactory.cs" />
+    <Compile Include="Registration\ReflectedRegistrationCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TInjector\TInjector.csproj">

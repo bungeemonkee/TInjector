@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace TInjector
 {
-    public interface IFactory<out T>
-        where T : class
+    public interface IFactory
     {
-        T Make(IRequest request);
+        object Make(IRequest request);
     }
 }

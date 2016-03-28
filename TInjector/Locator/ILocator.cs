@@ -5,7 +5,7 @@
 using System;
 using TInjector.Registration;
 
-namespace TInjector
+namespace TInjector.Locator
 {
     /// <summary>
     ///     Functionality all DI root objects must implement.
@@ -28,20 +28,5 @@ namespace TInjector
         /// <param name="service">The type of the service to get.</param>
         /// <returns>An implementation of the given service type.</returns>
         object Get(Type service);
-
-        /// <summary>
-        ///     Gets the registration for a given service.
-        /// </summary>
-        /// <returns>The registration for the given service or null if none exists.</returns>
-        IRegistration<T> GetRegistration<T>() where T : class;
-
-        /// <summary>
-        ///     Gets the registration for a given service.
-        ///     The returned registration object can be casted up to IRegistration&lt;T&gt; where T is the type of service.
-        ///     It is *HIGHLY* recommended to use the strongly typed GetRegistration&lt;T&gt;() version whenever possible.
-        /// </summary>
-        /// <param name="service">The service type to get the registration for.</param>
-        /// <returns>The registration for the given service or null if none exists.</returns>
-        IRegistration<object> GetRegistration(Type service);
     }
 }

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using TInjector.Locator;
 
 namespace TInjector.Web.Mvc
 {
@@ -70,7 +71,7 @@ namespace TInjector.Web.Mvc
             try
             {
                 // get the service from the locator
-                return (T) _locator.Get(rootType);
+                return (T)_locator.Get(rootType);
             }
             catch
             {
@@ -84,7 +85,7 @@ namespace TInjector.Web.Mvc
                     if (result != null)
                     {
                         // return the secondary resolver's result
-                        return (T) result;
+                        return (T)result;
                     }
                 }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 
 namespace TInjector
 {
@@ -14,8 +13,12 @@ namespace TInjector
             Func = expression.ReduceAndCompile();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public T Make(IRequest request)
+        public T Make(IRequest<T> request)
+        {
+            return (T)((IFactory)this).Make(request);
+        }
+
+        object IFactory.Make(IRequest request)
         {
             return Func(request);
         }
