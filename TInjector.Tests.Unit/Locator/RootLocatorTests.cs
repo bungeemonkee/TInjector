@@ -9,6 +9,7 @@ namespace TInjector.Tests.Unit.Locator
     [ExcludeFromCodeCoverage]
     public class RootLocatorTests
     {
+        [Ignore]
         [TestMethod]
         public void Get()
         {
