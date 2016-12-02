@@ -33,7 +33,7 @@ namespace TInjector.Web.Mvc
         public object GetService(Type serviceType)
         {
             // get the object
-            return Get<IEnumerable<object>>(serviceType, serviceType);
+            return Get<IEnumerable<object>>(serviceType, serviceType).First();
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
@@ -48,17 +48,14 @@ namespace TInjector.Web.Mvc
             catch
             {
                 // if there is a secondary dependency resolver...
-                if (_secondaryResolver != null)
-                {
-                    // get the service from the secondary dependency resolver
-                    var result = _secondaryResolver.GetServices(serviceType);
+                // get the service from the secondary dependency resolver
+                var result = _secondaryResolver?.GetServices(serviceType);
 
-                    // if the secondary dependency resolver created anything...
-                    if (result != null)
-                    {
-                        // return the secondary resolver's result
-                        return result;
-                    }
+                // if the secondary dependency resolver created anything...
+                if (result != null)
+                {
+                    // return the secondary resolver's result
+                    return result;
                 }
 
                 // there is no secondary resolver or it couldn't find anything
@@ -76,17 +73,14 @@ namespace TInjector.Web.Mvc
             catch
             {
                 // if there is a secondary dependency resolver...
-                if (_secondaryResolver != null)
-                {
-                    // get the service from the secondary dependency resolver
-                    var result = _secondaryResolver.GetService(serviceType);
+                // get the service from the secondary dependency resolver
+                var result = _secondaryResolver?.GetService(serviceType);
 
-                    // if the secondary dependency resolver created anything...
-                    if (result != null)
-                    {
-                        // return the secondary resolver's result
-                        return (T)result;
-                    }
+                // if the secondary dependency resolver created anything...
+                if (result != null)
+                {
+                    // return the secondary resolver's result
+                    return (T)result;
                 }
 
                 // there is no secondary resolver or it couldn't find anything

@@ -1,4 +1,6 @@
 ﻿using System;
+using TInjector.Factory;
+using TInjector.Locator;
 
 namespace TInjector.Registration
 {

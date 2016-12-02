@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq.Expressions;
+using TInjector.Locator;
 
-namespace TInjector
+namespace TInjector.Factory
 {
-    public class ExpressionFactory<T> : IFactory<T>
+    public class ExpressionFactory<T> : IFactory
         where T : class
     {
         public readonly Func<IRequest, T> Func;
@@ -13,12 +14,7 @@ namespace TInjector
             Func = expression.ReduceAndCompile();
         }
 
-        public T Make(IRequest<T> request)
-        {
-            return (T)((IFactory)this).Make(request);
-        }
-
-        object IFactory.Make(IRequest request)
+        public object Make(IRequest request)
         {
             return Func(request);
         }

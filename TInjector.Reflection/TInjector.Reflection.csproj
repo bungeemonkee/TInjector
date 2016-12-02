@@ -40,10 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factory\ReflectedConstructor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registration\ReflectedFactory.cs" />
+    <Compile Include="Factory\ReflectedFactory.cs" />
     <Compile Include="Registration\ReflectedRegistration.cs" />
     <Compile Include="Registration\ReflectedRegistrationCollection.cs" />
+    <Compile Include="Registration\ServicesToIgnore.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TInjector\TInjector.csproj">

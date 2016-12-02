@@ -3,7 +3,6 @@
 // Created: 2015-10-17 10:23 AM
 
 using System;
-using TInjector.Registration;
 
 namespace TInjector.Locator
 {
@@ -23,7 +22,7 @@ namespace TInjector.Locator
         /// <summary>
         ///     Get a service implementation (as an object).
         ///     You will have to cast the object back to the type you want.
-        ///     It is *HIGHLY* recommended to use the strongly typed Get&lt;T&gt;() version whenever possible.
+        ///     It is *HIGHLY* recommended to use the strongly typed <see cref="ILocator.Get{T}()"/> version whenever possible.
         /// </summary>
         /// <param name="service">The type of the service to get.</param>
         /// <returns>An implementation of the given service type.</returns>

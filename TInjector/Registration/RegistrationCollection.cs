@@ -36,19 +36,6 @@ namespace TInjector.Registration
             return _registrations[service];
         }
 
-        public IRegistration<T> GetRegistration<T>()
-        {
-            return (IRegistration<T>)_registrations[typeof(T)];
-        }
-
-        public void Add<T>(IRegistration<T> registration)
-        {
-            foreach (var service in registration.Services)
-            {
-                _registrations[service] = registration;
-            }
-        }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();

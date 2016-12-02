@@ -34,31 +34,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ExpressionExtensions.cs" />
-    <Compile Include="ExpressionFactory.cs" />
+    <Compile Include="Factory\ExpressionExtensions.cs" />
+    <Compile Include="Factory\ExpressionFactory.cs" />
     <Compile Include="Locator\GraphLocator.cs" />
-    <Compile Include="IFactory`1.cs" />
-    <Compile Include="Locator\RootLocatorGetFromCacheOrMakeArguments.cs" />
-    <Compile Include="Locator\RootLocatorMakeArguments.cs" />
-    <Compile Include="Locator\RootLocatorGetArguments.cs" />
     <Compile Include="Registration\IRegistrationCollection.cs" />
     <Compile Include="Registration\RegistrationCollection.cs" />
-    <Compile Include="Request\IRequest`1.cs" />
     <Compile Include="Locator\LocatorException.cs" />
     <Compile Include="Registration\FluentRegistration.cs" />
     <Compile Include="Registration\FluentRegistrationExtensions.cs" />
     <Compile Include="Registration\FluentRegistrationWithService.cs" />
-    <Compile Include="Registration\IRegistration`1.cs" />
-    <Compile Include="IFactory.cs" />
+    <Compile Include="Factory\IFactory.cs" />
     <Compile Include="Locator\ILocator.cs" />
     <Compile Include="Registration\IRegistration.cs" />
-    <Compile Include="Request\IRequest.cs" />
+    <Compile Include="Locator\IRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Locator\RootLocator.cs" />
-    <Compile Include="Request\SimpleRequest.cs" />
-    <Compile Include="Request\SimpleRequest`1.cs" />
+    <Compile Include="Locator\Request.cs" />
     <Compile Include="Scope.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

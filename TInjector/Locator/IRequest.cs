@@ -1,17 +1,14 @@
 ﻿using System;
-using TInjector.Locator;
 using TInjector.Registration;
 
-namespace TInjector
+namespace TInjector.Locator
 {
-    public interface IRequest
+    public interface IRequest : ILocator
     {
         IRequest Parent { get; }
 
         Type Service { get; }
 
-        ILocator Locator { get; }
-
         IRegistrationCollection Registrations { get; }
-}
+    }
 }

@@ -23,8 +23,8 @@ namespace TInjector.Reflection.Registration
             _registrations = assemblies
                 .Select(x => x.GetExportedTypes())
                 .SelectMany(x => x)
+                .Where(x => x.IsClass)
                 .Where(x => !x.IsAbstract)
-                .Where(x => !x.IsClass)
                 .Where(x => !x.IsGenericTypeDefinition) // TODO: Support generics?
                 .Select(x => RegistrationType.MakeGenericType(x))
                 .Select(x => (IRegistration)Activator.CreateInstance(x))
@@ -44,11 +44,6 @@ namespace TInjector.Reflection.Registration
         public IRegistration GetRegistration(Type service)
         {
             return _registrations[service];
-        }
-
-        public IRegistration<T> GetRegistration<T>()
-        {
-            return (IRegistration<T>)_registrations[typeof(T)];
         }
 
         IEnumerator IEnumerable.GetEnumerator()

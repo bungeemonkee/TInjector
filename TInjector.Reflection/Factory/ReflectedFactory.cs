@@ -1,32 +1,29 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using TInjector.Factory;
+using TInjector.Locator;
 
-namespace TInjector.Reflection.Registration
+namespace TInjector.Reflection.Factory
 {
-    public class ReflectedFactory<T> : IFactory<T>
+    public class ReflectedFactory<T> : IFactory
         where T : class
     {
-        private Func<IRequest, T> _constructorInvoker;
+        private ReflectedConstructor<T> _constructor;
 
         public object Make(IRequest request)
         {
-            if (_constructorInvoker == null)
+            if (_constructor != null) return _constructor.Invoke(request);
+
+            lock (this)
             {
-                _constructorInvoker = GetConstructorInvoker(request);
+                if (_constructor == null)
+                {
+                    _constructor = GetConstructorInvoker(request);
+                }
             }
 
-            return _constructorInvoker(request);
-        }
-
-        public T Make(IRequest<T> request)
-        {
-            if (_constructorInvoker == null)
-            {
-                _constructorInvoker = GetConstructorInvoker(request);
-            }
-
-            return _constructorInvoker(request);
+            return _constructor.Invoke(request);
         }
 
         protected virtual ConstructorInfo SelectConstructor(Func<Type, bool> isRegistered)
@@ -41,8 +38,8 @@ namespace TInjector.Reflection.Registration
                 })
                 .Select(x => new
                 {
-                    Constructor = x.Constructor,
-                    Parameters = x.Parameters,
+                    x.Constructor,
+                    x.Parameters,
                     RegisteredParametersCount = x.Parameters.Count(y => isRegistered(y.ParameterType))
                 })
                 .Where(x => x.Parameters.Length == x.RegisteredParametersCount)
@@ -51,18 +48,12 @@ namespace TInjector.Reflection.Registration
                 .First();
         }
 
-        private Func<IRequest, T> GetConstructorInvoker(IRequest request)
+        private ReflectedConstructor<T> GetConstructorInvoker(IRequest request)
         {
-            if (_constructorInvoker != null) return _constructorInvoker;
-
             var constructor = SelectConstructor(x => request.Registrations.GetRegistration(x) != null);
             var parameters = constructor.GetParameters().Select(x => x.ParameterType).ToArray();
-
-            return (IRequest r) =>
-            {
-                var arguments = parameters.Select(x => r.Locator.Get(x)).ToArray();
-                return (T)constructor.Invoke(arguments);
-            };
+            
+            return new ReflectedConstructor<T>(constructor, parameters);
         }
     }
 }

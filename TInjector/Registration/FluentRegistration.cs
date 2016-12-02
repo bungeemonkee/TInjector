@@ -1,45 +1,40 @@
 ﻿using System;
 using System.Linq.Expressions;
+using TInjector.Factory;
+using TInjector.Locator;
 
 namespace TInjector.Registration
 {
-    public class FluentRegistration<T> : IRegistration<T>
+    public class FluentRegistration<T> : IRegistration
         where T : class
     {
-        private readonly FluentRegistration<T> _parent;
-        private string _creationStackTrace;
-        private IFactory<T> _factory;
-        private Type _implementer;
-        private Scope _scope;
         private Type[] _services;
         private Action<IRequest, object>[] _activationCallbacks;
 
-        public string CreationStackTrace => _parent?.CreationStackTrace ?? _creationStackTrace;
+        public string CreationStackTrace { get; }
 
-        public IFactory<T> Factory => _parent?.Factory ?? _factory;
+        public IFactory Factory { get; }
 
-        public Type Implementer => _parent?.Implementer ?? _implementer;
+        public Type Implementer { get; }
 
-        public Scope Scope => _parent?.Scope ?? _scope;
+        public Scope Scope { get; private set; }
 
-        public Type[] Services => _parent?.Services ?? _services;
+        public Type[] Services => _services;
 
-        public Action<IRequest, T>[] ActivationCallbacks => _parent?.ActivationCallbacks ?? _activationCallbacks;
-
-        IFactory IRegistration.Factory => _parent?.Factory ?? _factory;
-
-        Action<IRequest, object>[] IRegistration.ActivationCallbacks => ((IRegistration)_parent)?.ActivationCallbacks ?? _activationCallbacks;
+        Action<IRequest, object>[] IRegistration.ActivationCallbacks => _activationCallbacks;
 
         public FluentRegistration(Expression<Func<IRequest, T>> expression)
             : this(new ExpressionFactory<T>(expression))
         { }
 
-        public FluentRegistration(IFactory<T> factory)
+        public FluentRegistration(IFactory factory)
         {
-            _factory = factory;
-            _implementer = typeof(T);
-            _scope = Scope.Transient;
-            _services = new[] { _implementer };
+            _services = new Type[0];
+            _activationCallbacks = new Action<IRequest, object>[0];
+
+            Factory = factory;
+            Implementer = typeof(T);
+            Scope = Scope.Transient;
 
             try
             {
@@ -48,45 +43,45 @@ namespace TInjector.Registration
             catch (Exception ex)
             {
                 // HACK: This is very non-ideal, but portable libraries don't (currently) support direct stack traces
-                _creationStackTrace = ex.StackTrace;
+                CreationStackTrace = ex.StackTrace;
             }
         }
 
-        protected FluentRegistration(FluentRegistration<T> parent)
+        protected FluentRegistration(FluentRegistration<T> copy)
         {
-            _parent = parent;
+            _services = copy._services;
+            _activationCallbacks = copy._activationCallbacks;
+
+            Factory = copy.Factory;
+            Implementer = copy.Implementer;
+            Scope = copy.Scope;
+            CreationStackTrace = copy.CreationStackTrace;
         }
 
         public FluentRegistration<T> InScope(Scope scope)
         {
-            _scope = scope;
+            Scope = scope;
             return this;
+        }
+
+        public FluentRegistration<T> AsSelf()
+        {
+            AddServices(Implementer);
+            return this;
+        }
+
+        public void WithActivation(Action<IRequest, T> callback)
+        {
+            var callbacks = new[] { (Action<IRequest, object>)callback };
+
+            // append the items to the existing array
+            AddArray(ref _activationCallbacks, callbacks);
         }
 
         protected void AddServices(params Type[] services)
         {
-            if (_parent != null)
-            {
-                // Add the services to the parent instead
-                _parent.AddServices(services);
-                return;
-            }
-
             // append the items to the existing array
             AddArray(ref _services, services);
-        }
-
-        protected void AddActivationCallbacks(params Action<IRequest, T>[] callbacks)
-        {
-            if (_parent != null)
-            {
-                // Add the callbacks to the parent instead
-                _parent.AddActivationCallbacks(callbacks);
-                return;
-            }
-
-            // append the items to the existing array
-            AddArray(ref _activationCallbacks, (Action<IRequest, object>[])callbacks);
         }
 
         private void AddArray<TArray>(ref TArray[] existingItems, TArray[] newItems)

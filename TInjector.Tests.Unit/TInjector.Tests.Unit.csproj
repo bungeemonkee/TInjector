@@ -40,7 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntegrationTests.cs" />
+    <Compile Include="IService1.cs" />
+    <Compile Include="IService2.cs" />
+    <Compile Include="IService3.cs" />
+    <Compile Include="Locator\RootLocatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service1.cs" />
+    <Compile Include="Service2.cs" />
+    <Compile Include="Service3.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TInjector\TInjector.csproj">
+      <Project>{a8e6e3ac-b222-47a2-8298-93d5f48df03c}</Project>
+      <Name>TInjector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -22,7 +22,7 @@ namespace TInjector.Web.Mvc
         public virtual void Application_Start(object sender, EventArgs e)
         {
             // Note: The HttpApplication constructor may be called more than once in the same application domain.
-            // Since we only want a single root factory (and root) we need to lock when generating the root.
+            // Since we only want a single root factory (and root) we need to use Application_Start when generating the root.
 
             // if there is already a root then return, shouldn't happen but it's worth it to be sure
             if (Locator != null) return;

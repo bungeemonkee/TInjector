@@ -1,5 +1,7 @@
 ﻿
-namespace TInjector
+using TInjector.Locator;
+
+namespace TInjector.Factory
 {
     public interface IFactory
     {
