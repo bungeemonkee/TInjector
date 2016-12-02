@@ -17,7 +17,7 @@ namespace TInjector.Web.Mvc
     {
         protected static ILocator Locator { get; private set; }
 
-        protected abstract IEnumerable<IRegistrationCollection> GetRegistrationCollections();
+        protected abstract IEnumerable<IRegistrationProvider> GetRegistrationCollections();
 
         public virtual void Application_Start(object sender, EventArgs e)
         {

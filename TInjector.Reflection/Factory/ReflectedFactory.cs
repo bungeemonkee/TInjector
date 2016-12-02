@@ -30,7 +30,7 @@ namespace TInjector.Reflection.Factory
         {
             // Get the public constructor where all parameters are registered that has the most parameters
             return typeof(T)
-                .GetConstructors(BindingFlags.Public)
+                .GetConstructors(BindingFlags.Public | BindingFlags.Instance)
                 .Select(x => new
                 {
                     Constructor = x,
@@ -51,9 +51,9 @@ namespace TInjector.Reflection.Factory
         private ReflectedConstructor<T> GetConstructorInvoker(IRequest request)
         {
             var constructor = SelectConstructor(x => request.Registrations.GetRegistration(x) != null);
-            var parameters = constructor.GetParameters().Select(x => x.ParameterType).ToArray();
+            var parameterTypes = constructor.GetParameters().Select(x => x.ParameterType).ToArray();
             
-            return new ReflectedConstructor<T>(constructor, parameters);
+            return new ReflectedConstructor<T>(constructor, parameterTypes);
         }
     }
 }

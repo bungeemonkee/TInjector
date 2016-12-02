@@ -9,11 +9,11 @@ namespace TInjector.Locator
     /// </summary>
     public class GraphLocator
     {
-        private readonly IRegistrationCollection _registrations;
+        private readonly IRegistrationProvider _registrations;
         private readonly IDictionary<Type, object> _graphScopeCache;
         private readonly IDictionary<Type, object> _singletonScopeCache;
 
-        public GraphLocator(IRegistrationCollection registrations, IDictionary<Type, object> singletonScopeCache)
+        public GraphLocator(IRegistrationProvider registrations, IDictionary<Type, object> singletonScopeCache)
         {
             _registrations = registrations;
             _singletonScopeCache = singletonScopeCache;

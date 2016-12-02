@@ -11,9 +11,9 @@ namespace TInjector.Locator
 
         public Type Service { get; }
 
-        public IRegistrationCollection Registrations { get; }
+        public IRegistrationProvider Registrations { get; }
 
-        public Request(Type service, IRegistrationCollection registrations, GraphLocator innerLocator)
+        public Request(Type service, IRegistrationProvider registrations, GraphLocator innerLocator)
         {
             Service = service;
             Registrations = registrations;

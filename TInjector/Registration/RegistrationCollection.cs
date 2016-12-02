@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace TInjector.Registration
 {
-    public class RegistrationCollection : IRegistrationCollection
+    public class RegistrationCollection : IRegistrationProvider, IEnumerable<IRegistration>
     {
         private readonly IDictionary<Type, IRegistration> _registrations;
 
@@ -14,7 +14,7 @@ namespace TInjector.Registration
             _registrations = new Dictionary<Type, IRegistration>();
         }
 
-        public RegistrationCollection(params IRegistrationCollection[] registrationCollections)
+        public RegistrationCollection(params RegistrationCollection[] registrationCollections)
         {
             _registrations = registrationCollections
                 .SelectMany(x => x)
@@ -33,7 +33,10 @@ namespace TInjector.Registration
 
         public IRegistration GetRegistration(Type service)
         {
-            return _registrations[service];
+            IRegistration result;
+            _registrations.TryGetValue(service, out result);
+
+            return result;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -45,7 +48,7 @@ namespace TInjector.Registration
         {
             foreach (var service in registration.Services)
             {
-                _registrations[service] = registration;
+                _registrations.Add(service, registration);
             }
         }
     }

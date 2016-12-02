@@ -9,6 +9,6 @@ namespace TInjector.Locator
 
         Type Service { get; }
 
-        IRegistrationCollection Registrations { get; }
+        IRegistrationProvider Registrations { get; }
     }
 }

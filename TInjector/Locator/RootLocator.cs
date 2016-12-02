@@ -10,19 +10,19 @@ namespace TInjector.Locator
 {
     public class RootLocator : ILocator
     {
-        private readonly IRegistrationCollection _registrations;
+        private readonly IRegistrationProvider _registrations;
         private readonly IDictionary<Type, object> _singletonScopeCache;
 
-        public RootLocator(params IRegistrationCollection[] registrationCollections)
+        public RootLocator(params IRegistrationProvider[] registrationProviders)
         {
-            if (registrationCollections == null)
+            if (registrationProviders == null)
             {
-                throw new ArgumentNullException(nameof(registrationCollections));
+                throw new ArgumentNullException(nameof(registrationProviders));
             }
 
-            _registrations = registrationCollections.Length == 1
-                ? registrationCollections[0]
-                : new RegistrationCollection(registrationCollections);
+            _registrations = registrationProviders.Length == 1
+                ? registrationProviders[0]
+                : new AggregatedRegistrationProvider(registrationProviders);
 
             _singletonScopeCache = new Dictionary<Type, object>();
         }
