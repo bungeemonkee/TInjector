@@ -1,6 +1,8 @@
 # TInjector
 A simple .NET IoC container with only the features needed for correctly-designed applications.
 
+[![Build Status](https://ci.appveyor.com/api/projects/status/jurd99rundkxp8di?svg=true)](https://ci.appveyor.com/project/bungeemonkee/tinjector) [![Coverage Status](https://coveralls.io/repos/github/bungeemonkee/TInjector/badge.svg?branch=master)](https://coveralls.io/github/bungeemonkee/TInjector?branch=master)
+
 ## Design Decisions
 * Only support features necessary for properly designed apps 
 	* No extensible scopes (prevent messy scope-dependant code)
