@@ -1,5 +1,8 @@
 # TInjector
+
 A simple .NET IoC container with only the features needed for correctly-designed applications.
+
+__NOTE:__ This is very much still under development. I have already re-written the whole thing several times. I'm not certain I'll ever be happy with its performance or design. It is largely just a platform for me to experiment with and basically deep dive into DI and IOC.
 
 [![Build Status](https://ci.appveyor.com/api/projects/status/jurd99rundkxp8di?svg=true)](https://ci.appveyor.com/project/bungeemonkee/tinjector) [![Coverage Status](https://coveralls.io/repos/github/bungeemonkee/TInjector/badge.svg?branch=master)](https://coveralls.io/github/bungeemonkee/TInjector?branch=master)
 
@@ -22,3 +25,4 @@ A simple .NET IoC container with only the features needed for correctly-designed
 
 ## TODO:
 * Support decorators? (implements the same interface and takes the base implementation as a constructor param)
+* Better method generation in TInjector.Reflection using generated IL (System.Reflection.Emit) or expression trees (System.Linq.Expressions)
